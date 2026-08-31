@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PROJECT X — Social Platform</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:#05070d;
+    color:#fff;
+    overflow:hidden;
+}
+
+.deck{
+    width:100vw;
+    height:100vh;
+    position:relative;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    display:none;
+    overflow-y:auto;
+    padding:55px 7% 100px;
+
+    background:
+        radial-gradient(circle at 85% 10%,rgba(111,75,255,.25),transparent 30%),
+        radial-gradient(circle at 5% 90%,rgba(0,210,255,.12),transparent 28%),
+        linear-gradient(135deg,#05070d,#080d18 55%,#060914);
+}
+
+.slide.active{
+    display:block;
+    animation:slideIn .35s ease;
+}
+
+@keyframes slideIn{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.container{
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.kicker{
+    color:#38d9ff;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:clamp(48px,7vw,92px);
+    line-height:.94;
+    letter-spacing:-5px;
+    margin-bottom:28px;
+}
+
+h2{
+    font-size:clamp(38px,5vw,65px);
+    line-height:.98;
+    letter-spacing:-3px;
+    margin-bottom:24px;
+}
+
+h3{
+    font-size:21px;
+    margin-bottom:11px;
+}
+
+p{
+    color:#b7c0d0;
+    font-size:17px;
+    line-height:1.65;
+}
+
+.lead{
+    font-size:24px;
+    line-height:1.5;
+    max-width:950px;
+}
+
+.hero{
+    min-height:78vh;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.logo{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:25px;
+    font-weight:900;
+    letter-spacing:2px;
+    font-size:18px;
+}
+
+.logo-dot{
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:#38d9ff;
+    box-shadow:0 0 25px #38d9ff;
+}
+
+.badges{
+    margin-top:28px;
+}
+
+.badge{
+    display:inline-block;
+    margin:4px;
+    padding:10px 15px;
+    border-radius:30px;
+    border:1px solid #27334a;
+    background:#ffffff06;
+    color:#dce5f2;
+    font-size:13px;
+}
+
+.quote{
+    margin-top:30px;
+    max-width:1000px;
+    padding:20px 24px;
+    border-left:4px solid #9075ff;
+    background:#ffffff06;
+    border-radius:12px;
+    color:#e8ecf5;
+    font-size:21px;
+    line-height:1.5;
+    font-weight:700;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:30px;
+}
+
+.grid2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:30px;
+}
+
+.card{
+    padding:24px;
+    border-radius:20px;
+    border:1px solid #253149;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+    box-shadow:0 18px 50px rgba(0,0,0,.2);
+}
+
+.card p{
+    font-size:15px;
+    color:#98a5ba;
+}
+
+.icon{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.number{
+    font-size:43px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.blue{color:#38d9ff}
+.purple{color:#9a7cff}
+.green{color:#42dfa7}
+.yellow{color:#ffd166}
+.red{color:#ff6f87}
+
+ul{
+    padding-left:22px;
+    color:#d5ddea;
+    line-height:1.8;
+}
+
+li{
+    margin:4px 0;
+}
+
+.flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:11px;
+    margin:30px 0;
+}
+
+.node{
+    padding:14px 18px;
+    background:#0e1523;
+    border:1px solid #29364e;
+    border-radius:14px;
+    font-weight:700;
+}
+
+.arrow{
+    color:#38d9ff;
+    font-size:24px;
+}
+
+.code{
+    background:#03050a;
+    border:1px solid #263148;
+    border-radius:18px;
+    padding:24px;
+    overflow:auto;
+    white-space:pre;
+    font-family:Consolas,Monaco,monospace;
+    font-size:14px;
+    line-height:1.7;
+    color:#dce6f7;
+}
+
+.small{
+    margin-top:14px;
+    font-size:13px;
+    color:#78859b;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:25px;
+    background:#ffffff04;
+    border:1px solid #263148;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+th{
+    padding:14px;
+    text-align:left;
+    color:#8290a7;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    border-bottom:1px solid #273249;
+}
+
+td{
+    padding:14px;
+    color:#d8dfeb;
+    border-bottom:1px solid #202a3c;
+}
+
+.big-money{
+    font-size:42px;
+    font-weight:900;
+    margin:10px 0;
+}
+
+.economy{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+    margin-top:30px;
+}
+
+.balance{
+    border:1px solid #2a3750;
+    border-radius:18px;
+    padding:22px;
+    background:#ffffff05;
+}
+
+.balance-title{
+    color:#8e9bb0;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.controls{
+    position:fixed;
+    left:50%;
+    bottom:17px;
+    transform:translateX(-50%);
+    z-index:100;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:9px 12px;
+
+    border:1px solid #29354b;
+    border-radius:50px;
+
+    background:#0a0f19e8;
+    backdrop-filter:blur(15px);
+}
+
+.controls button{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:#172236;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.controls button:hover{
+    background:#2a3955;
+}
+
+.slide-number{
+    min-width:62px;
+    text-align:center;
+    color:#8e9aae;
+    font-size:13px;
+}
+
+.progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:3px;
+    z-index:200;
+    background:linear-gradient(90deg,#9075ff,#38d9ff);
+}
+
+@media(max-width:800px){
+
+    .slide{
+        padding:35px 20px 90px;
+    }
+
+    h1{
+        font-size:48px;
+        letter-spacing:-3px;
+    }
+
+    h2{
+        font-size:39px;
+        letter-spacing:-2px;
+    }
+
+    .lead{
+        font-size:19px;
+    }
+
+    .grid,
+    .grid2,
+    .economy{
+        grid-template-columns:1fr;
+    }
+
+    .flow{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    .arrow{
+        text-align:center;
+        transform:rotate(90deg);
+    }
+
+    table{
+        font-size:12px;
+    }
+
+    th,td{
+        padding:9px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="deck">
+
+<!-- 01 -->
+
+<section class="slide active">
+<div class="container hero">
+
+<div class="logo">
+<span class="logo-dot"></span>
+PROJECT X
+</div>
+
+<div class="kicker">
+NEXT GENERATION SOCIAL PLATFORM
+</div>
+
+<h1>
+Своя социальная<br>
+платформа.
+</h1>
+
+<p class="lead">
+Фото • короткие видео • Stories • рекомендации •
+общение • сообщества • бизнес • реклама •
+подарки • бонусы • cashback • внутренняя экономика.
+</p>
+
+<div class="badges">
+
+<span class="badge">100 000 активных пользователей</span>
+<span class="badge">Видео до 30 секунд</span>
+<span class="badge">Собственный backend</span>
+<span class="badge">Собственный алгоритм</span>
+<span class="badge">Масштабируемая архитектура</span>
+
+</div>
+
+<div class="quote">
+PROJECT X строится как самостоятельная технологическая платформа:
+мы сами создаём ядро, бизнес-логику, алгоритмы, экономику и систему защиты.
+</div>
+
+</div>
+</section>
+
+
+<!-- 02 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">01 • КОНЦЕПЦИЯ</div>
+
+<h2>
+Что такое PROJECT X?
+</h2>
+
+<p>
+Это социальная платформа нового поколения, объединяющая
+обычное социальное взаимодействие с инструментами
+монетизации для пользователей, авторов и бизнеса.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">📱</div>
+<h3>Социальная сеть</h3>
+<p>
+Профили, подписки, публикации, фото,
+видео, Stories, лайки и комментарии.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🧠</div>
+<h3>Умная лента</h3>
+<p>
+Персональные рекомендации на основе
+интересов и поведения пользователя.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">💰</div>
+<h3>Внутренняя экономика</h3>
+<p>
+Бонусы, подарки, cashback, реферальные
+механики и внутренняя бонусная валюта.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 03 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">02 • ФУНКЦИИ</div>
+
+<h2>
+Что получает пользователь?
+</h2>
+
+<div class="grid2">
+
+<div class="card">
+<h3>👤 Аккаунт</h3>
+<ul>
+<li>Регистрация</li>
+<li>Профиль</li>
+<li>Подписчики и подписки</li>
+<li>Настройки приватности</li>
+<li>2FA</li>
+<li>Управление сессиями</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>📸 Контент</h3>
+<ul>
+<li>Фото</li>
+<li>Посты</li>
+<li>Видео до 30 секунд</li>
+<li>Stories</li>
+<li>Лайки</li>
+<li>Комментарии</li>
+<li>Репосты</li>
+<li>Сохранения</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>💬 Общение</h3>
+<ul>
+<li>Личные сообщения</li>
+<li>Чаты</li>
+<li>Уведомления</li>
+<li>Сообщества</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>🔎 Поиск</h3>
+<ul>
+<li>Пользователи</li>
+<li>Видео</li>
+<li>Посты</li>
+<li>Хэштеги</li>
+<li>Сообщества</li>
+<li>Бизнес-аккаунты</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 04 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">03 • ВИДЕО</div>
+
+<h2>
+Видео — главный тяжёлый ресурс
+</h2>
+
+<p>
+Поэтому на первом этапе устанавливаем максимальную длину
+короткого ролика — 30 секунд. Это позволяет контролировать
+хранение, обработку и передачу данных.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<div class="number blue">30 сек.</div>
+<h3>Ограничение ролика</h3>
+<p>
+Меньше средний размер файла —
+предсказуемее инфраструктурные расходы.
+</p>
+</div>
+
+<div class="card">
+<div class="number purple">CDN</div>
+<h3>Быстрая доставка</h3>
+<p>
+Популярный контент отдаётся через
+кэш и CDN, а не через основной backend.
+</p>
+</div>
+
+<div class="card">
+<div class="number green">Storage</div>
+<h3>Отдельное хранение</h3>
+<p>
+Видео хранится отдельно от базы
+и серверов бизнес-логики.
+</p>
+</div>
+
+</div>
+
+<div class="quote">
+Главный принцип: приложение-сервер не должен становиться
+«видеохранилищем». Тяжёлые данные выносятся в отдельный контур.
+</div>
+
+</div>
+</section>
+
+
+<!-- 05 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">04 • АЛГОРИТМ</div>
+
+<h2>
+Как формируется лента?
+</h2>
+
+<div class="flow">
+
+<div class="node">Интересы</div>
+<div class="arrow">→</div>
+<div class="node">Подписки</div>
+<div class="arrow">→</div>
+<div class="node">Свежесть</div>
+<div class="arrow">→</div>
+<div class="node">Досмотр</div>
+<div class="arrow">→</div>
+<div class="node">Лайки</div>
+<div class="arrow">→</div>
+<div class="node">Комментарии</div>
+<div class="arrow">→</div>
+<div class="node">Качество</div>
+
+</div>
+
+<div class="grid2">
+
+<div class="card">
+<h3>Following</h3>
+<p>
+Контент от аккаунтов, на которые пользователь подписан.
+</p>
+</div>
+
+<div class="card">
+<h3>For You</h3>
+<p>
+Рекомендации контента, который с высокой вероятностью
+заинтересует конкретного человека.
+</p>
+</div>
+
+</div>
+
+<div class="quote">
+На старте используем понятную систему ranking.
+После накопления данных можно добавлять ML-модели
+и более сложные рекомендации.
+</div>
+
+</div>
+</section>
+
+
+<!-- 06 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">05 • АРХИТЕКТУРА</div>
+
+<h2>
+Технологическое ядро
+</h2>
+
+<div class="code">
+USER
+  │
+  ▼
+WAF / DDoS / CDN
+  │
+  ▼
+LOAD BALANCER
+  │
+  ▼
+API / BACKEND CLUSTER
+  │
+  ├── AUTH
+  ├── USERS
+  ├── POSTS
+  ├── MEDIA
+  ├── FEED
+  ├── COMMENTS
+  ├── LIKES
+  ├── MESSAGES
+  ├── NOTIFICATIONS
+  ├── SEARCH
+  ├── COMMUNITIES
+  ├── BUSINESS
+  ├── ADVERTISING
+  ├── PAYMENTS
+  ├── BONUSES
+  ├── GIFTS
+  ├── CASHBACK
+  └── ECONOMY
+          │
+          ▼
+    REDIS / QUEUES
+          │
+          ▼
+    DATABASE CLUSTER
+          │
+          ▼
+    OBJECT STORAGE
+          │
+          ▼
+          CDN
+</div>
+
+<p class="small">
+Каждый тяжёлый компонент можно масштабировать независимо.
+</p>
+
+</div>
+</section>
+
+
+<!-- 07 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">06 • СТРУКТУРА ПРОЕКТА</div>
+
+<h2>
+Мы создаём код сами
+</h2>
+
+<p>
+Мы не покупаем готовую социальную сеть.
+Архитектура и ключевая бизнес-логика создаются нами.
+При этом допустимо использовать проверенные open-source
+компоненты как технические строительные блоки.
+</p>
+
+<div class="code">
+/project-x
+
+├── apps/
+│   ├── android/
+│   ├── ios/
+│   └── web/
+│
+├── backend/
+│   ├── auth/
+│   ├── users/
+│   ├── posts/
+│   ├── media/
+│   ├── feed/
+│   ├── comments/
+│   ├── likes/
+│   ├── messages/
+│   ├── notifications/
+│   ├── search/
+│   ├── communities/
+│   ├── business/
+│   ├── advertising/
+│   ├── payments/
+│   ├── bonuses/
+│   ├── gifts/
+│   ├── cashback/
+│   └── economy/
+│
+├── security/
+│   ├── antifraud/
+│   ├── rate_limit/
+│   ├── audit/
+│   ├── risk_engine/
+│   └── moderation/
+│
+├── admin/
+│
+└── infrastructure/
+    ├── database/
+    ├── redis/
+    ├── storage/
+    ├── cdn/
+    ├── queues/
+    ├── monitoring/
+    └── deployment/
+</div>
+
+</div>
+</section>
+
+
+<!-- 08 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">07 • БОНУСНАЯ СИСТЕМА</div>
+
+<h2>
+Бонусы — отдельный двигатель экономики
+</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">🎁</div>
+<h3>Activity Bonus</h3>
+<p>
+Вознаграждение за полезную активность
+внутри платформы.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">💳</div>
+<h3>Cashback</h3>
+<p>
+Часть покупки может возвращаться
+пользователю бонусами.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🤝</div>
+<h3>Referral</h3>
+<p>
+Бонусы за привлечение новых
+активных пользователей.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🏆</div>
+<h3>Campaigns</h3>
+<p>
+Временные акции, конкурсы,
+задания и специальные программы.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">⭐</div>
+<h3>Creator Rewards</h3>
+<p>
+Механика поддержки и вознаграждения
+авторов контента.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🪙</div>
+<h3>Internal Currency</h3>
+<p>
+Внутренняя бонусная валюта,
+используемая внутри экосистемы.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 09 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">08 • ЭКОНОМИКА ПОЛЬЗОВАТЕЛЯ</div>
+
+<h2>
+Два разных баланса
+</h2>
+
+<div class="economy">
+
+<div class="balance">
+
+<div class="balance-title">
+Реальные деньги
+</div>
+
+<h3>💵 FIAT BALANCE</h3>
+
+<ul>
+<li>Покупки</li>
+<li>Вывод средств</li>
+<li>Оплата рекламы</li>
+<li>Платные функции</li>
+<li>Коммерческие операции</li>
+</ul>
+
+</div>
+
+<div class="balance">
+
+<div class="balance-title">
+Бонусная экономика
+</div>
+
+<h3>🪙 BONUS BALANCE</h3>
+
+<ul>
+<li>Бонусы</li>
+<li>Cashback</li>
+<li>Подарки</li>
+<li>Реферальные начисления</li>
+<li>Внутренняя валюта</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="quote">
+Бонусный баланс и реальные деньги не должны смешиваться.
+Каждое изменение баланса создаёт отдельную транзакцию
+и попадает в историю операций.
+</div>
+
+</div>
+</section>
+
+
+<!-- 10 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">09 • ПОДАРКИ</div>
+
+<h2>
+Пользователь → автор → платформа
+</h2>
+
+<div class="flow">
+
+<div class="node">Пользователь</div>
+<div class="arrow">→</div>
+<div class="node">Покупает подарок</div>
+<div class="arrow">→</div>
+<div class="node">Автор получает долю</div>
+<div class="arrow">→</div>
+<div class="node">Платформа получает комиссию</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>🎁 Подарки</h3>
+<p>
+Виртуальные подарки становятся
+инструментом поддержки авторов.
+</p>
+</div>
+
+<div class="card">
+<h3>🎨 Авторы</h3>
+<p>
+Получают дополнительный источник
+монетизации своей аудитории.
+</p>
+</div>
+
+<div class="card">
+<h3>🏦 Платформа</h3>
+<p>
+Получает комиссию за проведение
+операции внутри экосистемы.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 11 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">10 • МОНЕТИЗАЦИЯ</div>
+
+<h2>
+Откуда приходит доход?
+</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">📢</div>
+<h3>Реклама</h3>
+<p>
+Основной потенциальный источник
+дохода при масштабировании аудитории.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🚀</div>
+<h3>Продвижение</h3>
+<p>
+Платное продвижение постов,
+видео, профилей и товаров.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🎁</div>
+<h3>Подарки</h3>
+<p>
+Комиссия платформы с виртуальных
+подарков.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">⭐</div>
+<h3>Подписки</h3>
+<p>
+Платные подписки на авторов
+и дополнительные возможности.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🏢</div>
+<h3>Business</h3>
+<p>
+Платные инструменты, аналитика,
+реклама и сервисы для компаний.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🛒</div>
+<h3>Коммерция</h3>
+<p>
+Комиссии с покупок и коммерческих
+операций внутри платформы.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 12 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">11 • ЗАМКНУТАЯ ЭКОНОМИКА</div>
+
+<h2>
+Как работает цикл денег?
+</h2>
+
+<div class="flow">
+
+<div class="node">Пользователь</div>
+<div class="arrow">→</div>
+<div class="node">Покупка</div>
+<div class="arrow">→</div>
+<div class="node">Платформа</div>
+<div class="arrow">→</div>
+<div class="node">Автор / бизнес</div>
+<div class="arrow">→</div>
+<div class="node">Активность</div>
+<div class="arrow">→</div>
+<div class="node">Новая покупка</div>
+
+</div>
+
+<div class="grid2">
+
+<div class="card">
+<h3>Деньги</h3>
+<p>
+Реальные платежи формируют коммерческий оборот.
+</p>
+</div>
+
+<div class="card">
+<h3>Бонусы</h3>
+<p>
+Бонусы стимулируют повторное использование
+платформы и удержание аудитории.
+</p>
+</div>
+
+<div class="card">
+<h3>Авторы</h3>
+<p>
+Авторы создают контент и получают возможность
+монетизировать аудиторию.
+</p>
+</div>
+
+<div class="card">
+<h3>Бизнес</h3>
+<p>
+Компании покупают внимание аудитории,
+рекламу и дополнительные сервисы.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 13 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">12 • БЕЗОПАСНОСТЬ</div>
+
+<h2>
+Защита закладывается с первого дня
+</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🛡️ Периметр</h3>
+<p>
+WAF, DDoS-защита, firewall,
+rate limiting и защита API.
+</p>
+</div>
+
+<div class="card">
+<h3>🔐 Авторизация</h3>
+<p>
+Безопасное хранение паролей,
+2FA, токены и управление сессиями.
+</p>
+</div>
+
+<div class="card">
+<h3>🤖 Anti-Fraud</h3>
+<p>
+Обнаружение ботов, накруток,
+аномального поведения и злоупотреблений.
+</p>
+</div>
+
+<div class="card">
+<h3>💳 Финансы</h3>
+<p>
+Лимиты, журнал операций,
+проверки и отдельный финансовый контур.
+</p>
+</div>
+
+<div class="card">
+<h3>👨‍💼 Admin Security</h3>
+<p>
+MFA, роли, минимальные права
+и полный audit log.
+</p>
+</div>
+
+<div class="card">
+<h3>🚑 Recovery</h3>
+<p>
+Резервные копии, репликация,
+мониторинг и аварийное восстановление.
+</p>
+</div>
+
+</div>
+
+<div class="quote">
+Абсолютной защиты не существует. Наша задача —
+минимизировать поверхность атаки и локализовать последствия
+возможной компрометации.
+</div>
+
+</div>
+</section>
+
+
+<!-- 14 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">13 • МОДЕРАЦИЯ</div>
+
+<h2>
+Платформа должна защищать пользователей
+</h2>
+
+<div class="flow">
+
+<div class="node">Загрузка</div>
+<div class="arrow">→</div>
+<div class="node">Автопроверка</div>
+<div class="arrow">→</div>
+<div class="node">Anti-Spam</div>
+<div class="arrow">→</div>
+<div class="node">Публикация</div>
+<div class="arrow">→</div>
+<div class="node">Жалоба</div>
+<div class="arrow">→</div>
+<div class="node">Модерация</div>
+
+</div>
+
+<ul>
+
+<li>Автоматическое обнаружение спама.</li>
+<li>Антибот и антинакрутка.</li>
+<li>Система жалоб.</li>
+<li>Блокировки и предупреждения.</li>
+<li>Модерация рекламы.</li>
+<li>История действий модераторов.</li>
+<li>Risk Engine для подозрительных действий.</li>
+
+</ul>
+
+</div>
+</section>
+
+
+<!-- 15 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">14 • МАСШТАБИРОВАНИЕ</div>
+
+<h2>
+Растём без остановки сервиса
+</h2>
+
+<div class="flow">
+
+<div class="node">MVP</div>
+<div class="arrow">→</div>
+<div class="node">Несколько серверов</div>
+<div class="arrow">→</div>
+<div class="node">Cluster</div>
+<div class="arrow">→</div>
+<div class="node">Региональный масштаб</div>
+<div class="arrow">→</div>
+<div class="node">Миллионы пользователей</div>
+
+</div>
+
+<div class="grid2">
+
+<div class="card">
+<h3>Load Balancer</h3>
+<p>
+Распределяет пользователей между
+несколькими backend-узлами.
+</p>
+</div>
+
+<div class="card">
+<h3>Database Cluster</h3>
+<p>
+Репликация, резервирование и
+масштабирование чтения.
+</p>
+</div>
+
+<div class="card">
+<h3>Video Cluster</h3>
+<p>
+Видеообработка и CDN масштабируются
+отдельно от основного backend.
+</p>
+</div>
+
+<div class="card">
+<h3>Zero Downtime</h3>
+<p>
+Обновление можно выкатывать постепенно,
+не выключая всю платформу.
+</p>
+</div>
+
+</div>
+
+<div class="quote">
+Мы не покупаем инфраструктуру на миллион пользователей
+в первый день. Мощность добавляется вместе с реальной нагрузкой.
+</div>
+
+</div>
+</section>
+
+
+<!-- 16 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">15 • ЭКОНОМИЯ НА ИНФРАСТРУКТУРЕ</div>
+
+<h2>
+Как не превратить видео в дыру бюджета?
+</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>1. 30 секунд</h3>
+<p>
+Ограничиваем размер короткого ролика.
+</p>
+</div>
+
+<div class="card">
+<h3>2. Compression</h3>
+<p>
+Автоматически уменьшаем размер
+видео после загрузки.
+</p>
+</div>
+
+<div class="card">
+<h3>3. CDN</h3>
+<p>
+Повторные просмотры отдаём
+через кэшированную сеть.
+</p>
+</div>
+
+<div class="card">
+<h3>4. Object Storage</h3>
+<p>
+Медиа отделяется от
+application-серверов.
+</p>
+</div>
+
+<div class="card">
+<h3>5. Redis</h3>
+<p>
+Горячие данные не приходится
+постоянно брать из базы.
+</p>
+</div>
+
+<div class="card">
+<h3>6. Автомасштабирование</h3>
+<p>
+Дополнительные мощности включаются
+по мере роста нагрузки.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 17 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">16 • 100 000 АКТИВНЫХ ПОЛЬЗОВАТЕЛЕЙ</div>
+
+<h2>
+Ориентировочная инфраструктура
+</h2>
+
+<p>
+Это модель для оценки порядка расходов.
+Фактическая стоимость зависит прежде всего от
+видеопросмотров, трафика, хранения и выбранных поставщиков.
+</p>
+
+<table>
+
+<tr>
+<th>Статья</th>
+<th>Ориентир / месяц</th>
+<th>Что влияет</th>
+</tr>
+
+<tr>
+<td>Backend / API</td>
+<td>60–140 тыс. ₽</td>
+<td>Запросы и количество узлов</td>
+</tr>
+
+<tr>
+<td>Database / Redis</td>
+<td>30–70 тыс. ₽</td>
+<td>Объём данных и нагрузка</td>
+</tr>
+
+<tr>
+<td>Storage + Backup</td>
+<td>30–80 тыс. ₽</td>
+<td>Количество медиа</td>
+</tr>
+
+<tr>
+<td>CDN / трафик</td>
+<td>70–200 тыс. ₽</td>
+<td>Количество просмотров</td>
+</tr>
+
+<tr>
+<td>Monitoring / Security</td>
+<td>10–30 тыс. ₽</td>
+<td>Количество сервисов</td>
+</tr>
+
+<tr>
+<td><strong>ИТОГО</strong></td>
+<td><strong>≈ 200–500 тыс. ₽</strong></td>
+<td>Умеренная нагрузка</td>
+</tr>
+
+</table>
+
+<p class="small">
+Цифры являются ориентиром для финансовой модели, а не коммерческим предложением поставщика.
+</p>
+
+</div>
+</section>
+
+
+<!-- 18 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">17 • ДОХОД</div>
+
+<h2>
+Пример экономики при 100 000 активных пользователей
+</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>📢 Реклама</h3>
+<div class="big-money blue">1 000 000 ₽</div>
+<p>Условная модель рекламной выручки.</p>
+</div>
+
+<div class="card">
+<h3>🎁 Подарки / подписки</h3>
+<div class="big-money purple">400 000 ₽</div>
+<p>Комиссии платформы.</p>
+</div>
+
+<div class="card">
+<h3>🚀 Продвижение</h3>
+<div class="big-money green">300 000 ₽</div>
+<p>Платное продвижение контента.</p>
+</div>
+
+<div class="card">
+<h3>🏢 Business / Commerce</h3>
+<div class="big-money yellow">300 000 ₽</div>
+<p>Бизнес-инструменты и коммерция.</p>
+</div>
+
+</div>
+
+<div class="quote">
+Примерная выручка модели: <strong>2 000 000 ₽ / месяц</strong>.
+При инфраструктуре 200–500 тыс. ₽ остаётся ориентировочно
+1,5–1,8 млн ₽ до остальных расходов.
+</div>
+
+</div>
+</section>
+
+
+<!-- 19 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">18 • ЧТО ЕЩЁ ПОТРЕБУЕТСЯ</div>
+
+<h2>
+Инфраструктура — не единственный расход
+</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>👨‍💻 Разработка</h3>
+<p>
+На первом этапе значительную часть
+кода и архитектуры создаём сами.
+</p>
+</div>
+
+<div class="card">
+<h3>📣 Маркетинг</h3>
+<p>
+Привлечение первых пользователей
+и авторов контента.
+</p>
+</div>
+
+<div class="card">
+<h3>⚖️ Юридическая часть</h3>
+<p>
+Документы, политика платформы,
+платежи и юридические требования.
+</p>
+</div>
+
+<div class="card">
+<h3>🛡️ Аудит безопасности</h3>
+<p>
+По мере готовности проекта необходимы
+профессиональные security-аудиты.
+</p>
+</div>
+
+<div class="card">
+<h3>👥 Поддержка</h3>
+<p>
+Обработка жалоб, обращений,
+модерация и помощь пользователям.
+</p>
+</div>
+
+<div class="card">
+<h3>📊 Аналитика</h3>
+<p>
+Метрики удержания, активности,
+монетизации и эффективности контента.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 20 -->
+
+<section class="slide">
+<div class="container">
+
+<div class="kicker">19 • ЭТАПЫ</div>
+
+<h2>
+Создаём постепенно
+</h2>
+
+<table>
+
+<tr>
+<th>Этап</th>
+<th>Разработка</th>
+<th>Результат</th>
+</tr>
+
+<tr>
+<td>01</td>
+<td>Auth / Users / Profiles / API</td>
+<td>Ядро</td>
+</tr>
+
+<tr>
+<td>02</td>
+<td>Posts / Photos / Video / Storage</td>
+<td>Контент</td>
+</tr>
+
+<tr>
+<td>03</td>
+<td>Feed / Likes / Comments / Ranking</td>
+<td>Социальная механика</td>
+</tr>
+
+<tr>
+<td>04</td>
+<td>Stories / Messages / Search</td>
+<td>MVP</td>
+</tr>
+
+<tr>
+<td>05</td>
+<td>Security / AntiFraud / Moderation</td>
+<td>Защита</td>
+</tr>
+
+<tr>
+<td>06</td>
+<td>Bonuses / Cashback / Gifts</td>
+<td>Экономика</td>
+</tr>
+
+<tr>
+<td>07</td>
+<td>Ads / Business / Commerce</td>
+<td>Монетизация</td>
+</tr>
+
+<tr>
+<td>08</td>
+<td>Clusters / CDN / Replication</td>
+<td>Масштаб</td>
+</tr>
+
+</table>
+
+<div class="quote">
+Главный принцип: сначала доказать, что продукт нужен людям,
+а затем масштабировать инфраструктуру вместе с аудиторией.
+</div>
+
+</div>
+</section>
+
+
+<!-- 21 -->
+
+<section class="slide">
+<div class="container hero">
+
+<div class="kicker">20 • PROJECT X</div>
+
+<h1>
+Сначала продукт.<br>
+Потом аудитория.<br>
+Потом масштаб.
+</h1>
+
+<p class="lead">
+Мы создаём не просто приложение.
+Мы создаём собственную цифровую экосистему,
+в которой пользователь, автор, бизнес и платформа
+заинтересованы друг в друге.
+</p>
+
+<div class="badges">
+
+<span class="badge">Social</span>
+<span class="badge">Video</span>
+<span class="badge">Creators</span>
+<span class="badge">Business</span>
+<span class="badge">Bonuses</span>
+<span class="badge">Cashback</span>
+<span class="badge">Economy</span>
+<span class="badge">Security</span>
+
+</div>
+
+<div class="quote">
+PROJECT X — рабочее название проекта.
+Название, бренд и отдельные экономические правила
+могут быть изменены по мере разработки.
+</div>
+
+</div>
+</section>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="progress" id="progress"></div>
+
+<div class="controls">
+
+<button onclick="previousSlide()">←</button>
+
+<div class="slide-number" id="slideNumber">
+1 / 21
+</div>
+
+<button onclick="nextSlide()">→</button>
+
+</div>
+
+
+<script>
+
+const slides =
+document.querySelectorAll(".slide");
+
+let current = 0;
+
+function showSlide(index){
+
+    current =
+        (index + slides.length)
+        % slides.length;
+
+    slides.forEach((slide,i)=>{
+
+        slide.classList.toggle(
+            "active",
+            i === current
+        );
+
+        if(i === current){
+            slide.scrollTop = 0;
+        }
+
+    });
+
+    document.getElementById(
+        "slideNumber"
+    ).textContent =
+        `${current + 1} / ${slides.length}`;
+
+    document.getElementById(
+        "progress"
+    ).style.width =
+        `${((current + 1) / slides.length) * 100}%`;
+}
+
+function nextSlide(){
+    showSlide(current + 1);
+}
+
+function previousSlide(){
+    showSlide(current - 1);
+}
+
+
+/* Keyboard */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "ArrowRight" ||
+            event.key === "PageDown" ||
+            event.key === " "
+        ){
+            event.preventDefault();
+            nextSlide();
+        }
+
+        if(
+            event.key === "ArrowLeft" ||
+            event.key === "PageUp"
+        ){
+            event.preventDefault();
+            previousSlide();
+        }
+
+        if(event.key === "Home"){
+            showSlide(0);
+        }
+
+        if(event.key === "End"){
+            showSlide(slides.length - 1);
+        }
+
+    }
+);
+
+
+/* Swipe */
+
+let touchStart = null;
+
+document.addEventListener(
+    "touchstart",
+    function(event){
+
+        touchStart =
+            event.changedTouches[0].screenX;
+
+    },
+    {passive:true}
+);
+
+document.addEventListener(
+    "touchend",
+    function(event){
+
+        if(touchStart === null)
+            return;
+
+        const touchEnd =
+            event.changedTouches[0].screenX;
+
+        const difference =
+            touchEnd - touchStart;
+
+        if(Math.abs(difference) > 60){
+
+            if(difference < 0){
+                nextSlide();
+            }else{
+                previousSlide();
+            }
+
+        }
+
+        touchStart = null;
+
+    },
+    {passive:true}
+);
+
+showSlide(0);
+
+</script>
+
+</body>
+</html>
