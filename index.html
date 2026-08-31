@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PROJECT X — концепция социальной платформы</title>
+
+<style>
+
+/* =========================
+   ОСНОВНЫЕ НАСТРОЙКИ
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #06070b;
+    color: #f4f6fb;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    line-height: 1.6;
+}
+
+body::selection {
+    background: #ffffff;
+    color: #000000;
+}
+
+
+/* =========================
+   ФОН
+========================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(95, 110, 255, 0.12),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 85% 40%,
+            rgba(0, 190, 255, 0.08),
+            transparent 28%
+        );
+
+    z-index: -1;
+}
+
+
+/* =========================
+   ПЕРВЫЙ ЭКРАН
+========================= */
+
+.hero {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 30px;
+}
+
+
+.hero-content {
+
+    max-width: 900px;
+
+    animation: heroAppear 1.5s ease forwards;
+
+}
+
+
+.hero-label {
+
+    display: inline-block;
+
+    padding: 8px 15px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 50px;
+
+    color: #aab3c5;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 30px;
+
+}
+
+
+.hero h1 {
+
+    margin: 0;
+
+    font-size: clamp(60px, 13vw, 150px);
+
+    letter-spacing: 14px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    background:
+        linear-gradient(
+            120deg,
+            #ffffff,
+            #9da9ff,
+            #ffffff
+        );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+}
+
+
+.hero-subtitle {
+
+    margin-top: 30px;
+
+    color: #9ba5b8;
+
+    font-size: clamp(17px, 3vw, 23px);
+
+}
+
+
+.hero-small {
+
+    margin-top: 18px;
+
+    color: #5f6879;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.scroll {
+
+    position: absolute;
+
+    bottom: 30px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #626c80;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    animation: float 2s infinite;
+
+}
+
+
+@keyframes heroAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(30px);
+
+        filter: blur(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+        filter: blur(0);
+
+    }
+
+}
+
+
+@keyframes float {
+
+    0%,100% {
+
+        transform: translateX(-50%) translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateX(-50%) translateY(-7px);
+
+    }
+
+}
+
+
+/* =========================
+   ОСНОВНАЯ ЧАСТЬ
+========================= */
+
+.container {
+
+    width: min(1150px, calc(100% - 40px));
+
+    margin: auto;
+
+}
+
+
+.introduction {
+
+    padding: 120px 0 80px;
+
+}
+
+
+.eyebrow {
+
+    color: #7f8ba1;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+
+}
+
+
+.introduction h2 {
+
+    font-size: clamp(32px, 6vw, 65px);
+
+    line-height: 1.1;
+
+    max-width: 850px;
+
+    margin: 0 0 30px;
+
+}
+
+
+.introduction p {
+
+    max-width: 800px;
+
+    color: #9ca6b8;
+
+    font-size: 19px;
+
+}
+
+
+/* =========================
+   РАЗДЕЛЫ
+========================= */
+
+.section {
+
+    margin: 35px 0;
+
+    padding: 35px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.045),
+            rgba(255,255,255,0.015)
+        );
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        background .3s ease;
+
+}
+
+
+.section:hover {
+
+    transform: translateY(-4px);
+
+    border-color: rgba(255,255,255,0.16);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.065),
+            rgba(255,255,255,0.02)
+        );
+
+}
+
+
+.section-number {
+
+    color: #69758c;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.section h3 {
+
+    font-size: 27px;
+
+    margin: 0 0 22px;
+
+}
+
+
+.items {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px, 1fr)
+        );
+
+    gap: 10px;
+
+}
+
+
+.item {
+
+    padding: 12px 15px;
+
+    background: rgba(255,255,255,0.035);
+
+    border: 1px solid rgba(255,255,255,0.055);
+
+    border-radius: 12px;
+
+    color: #c4cbd7;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================
+   ИТОГО
+========================= */
+
+.conclusion {
+
+    margin: 110px 0;
+
+    padding: 70px 40px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(100,120,255,0.16),
+            transparent 60%
+        ),
+
+        #0b0e15;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+}
+
+
+.conclusion h2 {
+
+    font-size: clamp(32px, 6vw, 60px);
+
+    margin-bottom: 25px;
+
+}
+
+
+.conclusion p {
+
+    max-width: 800px;
+
+    margin: auto;
+
+    color: #aab3c2;
+
+    font-size: 19px;
+
+}
+
+
+/* =========================
+   ЭКОНОМИКА
+========================= */
+
+.economy {
+
+    margin-top: 80px;
+
+}
+
+
+.economy-header {
+
+    margin-bottom: 35px;
+
+}
+
+
+.economy-header h2 {
+
+    font-size: clamp(35px, 7vw, 70px);
+
+    margin: 0;
+
+}
+
+
+.economy-header p {
+
+    color: #8e98aa;
+
+    max-width: 700px;
+
+    font-size: 18px;
+
+}
+
+
+.money-card {
+
+    padding: 30px;
+
+    margin: 15px 0;
+
+    border-radius: 20px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background: #0d1017;
+
+}
+
+
+.money-card h3 {
+
+    margin: 0 0 10px;
+
+    font-size: 19px;
+
+}
+
+
+.money-card p {
+
+    margin: 0;
+
+    color: #aeb7c7;
+
+}
+
+
+.economy-model {
+
+    margin-top: 50px;
+
+    padding: 45px;
+
+    border-radius: 25px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #121625,
+            #0a0d14
+        );
+
+    border: 1px solid rgba(150,165,255,0.18);
+
+}
+
+
+.economy-model h3 {
+
+    margin-top: 0;
+
+    font-size: 24px;
+
+}
+
+
+.model-line {
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+
+    font-size: 18px;
+
+}
+
+
+.model-line:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.model-line strong {
+
+    color: #ffffff;
+
+}
+
+
+/* =========================
+   ФИНАЛ
+========================= */
+
+.final {
+
+    padding: 130px 0;
+
+    text-align: center;
+
+}
+
+
+.final h2 {
+
+    font-size: clamp(40px, 8vw, 85px);
+
+    margin: 0;
+
+}
+
+
+.final p {
+
+    color: #727d91;
+
+    margin-top: 20px;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    border-top: 1px solid rgba(255,255,255,0.07);
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    color: #4f596b;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================= */
+
+@media(max-width:600px) {
+
+    .hero h1 {
+
+        letter-spacing: 6px;
+
+        font-size: 48px;
+
+    }
+
+
+    .container {
+
+        width:
+            calc(100% - 24px);
+
+    }
+
+
+    .section {
+
+        padding: 23px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .items {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .introduction {
+
+        padding-top: 80px;
+
+    }
+
+
+    .economy-model {
+
+        padding: 25px;
+
+    }
+
+
+    .conclusion {
+
+        padding: 50px 25px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="hero-label">
+Временное название проекта
+</div>
+
+
+<h1>
+PROJECT X
+</h1>
+
+
+<div class="hero-subtitle">
+
+Полноценная социальная платформа
+с видео, авторами, бизнесом
+и собственной экономикой.
+
+</div>
+
+
+<div class="hero-small">
+
+РАБОЧАЯ КОНЦЕПЦИЯ
+
+</div>
+
+</div>
+
+
+<div class="scroll">
+
+ПРОКРУТИТЕ ВНИЗ ↓
+
+</div>
+
+</section>
+
+
+
+<main class="container">
+
+
+<!-- =========================
+     ВВЕДЕНИЕ
+========================= -->
+
+<section class="introduction">
+
+<div class="eyebrow">
+КОНЦЕПЦИЯ
+</div>
+
+
+<h2>
+
+Это уже не просто
+«копия Instagram».
+
+</h2>
+
+
+<p>
+
+Вот весь скелет нашей соцсети,
+кратко и по пунктам.
+
+</p>
+
+</section>
+
+
+
+<!-- =========================
+     1
+========================= -->
+
+<section class="section">
+
+<div class="section-number">
+01
+</div>
+
+<h3>
+🧱 Приложения
+</h3>
+
+<div class="items">
+
+<div class="item">Android</div>
+<div class="item">iOS</div>
+<div class="item">Web</div>
+<div class="item">Админ-панель</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 2 -->
+
+<section class="section">
+
+<div class="section-number">
+02
+</div>
+
+<h3>
+👤 Пользователи
+</h3>
+
+<div class="items">
+
+<div class="item">Регистрация / вход</div>
+<div class="item">Профили</div>
+<div class="item">Подписки / подписчики</div>
+<div class="item">2FA</div>
+<div class="item">Восстановление аккаунта</div>
+<div class="item">Верификация</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 3 -->
+
+<section class="section">
+
+<div class="section-number">
+03
+</div>
+
+<h3>
+📸 Контент
+</h3>
+
+<div class="items">
+
+<div class="item">Фото</div>
+<div class="item">Посты</div>
+<div class="item">Видео до 30 секунд</div>
+<div class="item">Stories</div>
+<div class="item">Лайки</div>
+<div class="item">Комментарии</div>
+<div class="item">Репосты</div>
+<div class="item">Сохранения</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 4 -->
+
+<section class="section">
+
+<div class="section-number">
+04
+</div>
+
+<h3>
+🧠 Лента
+</h3>
+
+<div class="items">
+
+<div class="item">Following</div>
+<div class="item">Рекомендации</div>
+<div class="item">Алгоритм интересов</div>
+<div class="item">Популярное</div>
+<div class="item">Региональные рекомендации</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 5 -->
+
+<section class="section">
+
+<div class="section-number">
+05
+</div>
+
+<h3>
+🎥 Видео
+</h3>
+
+<div class="items">
+
+<div class="item">Загрузка</div>
+<div class="item">Автосжатие</div>
+<div class="item">Несколько качеств</div>
+<div class="item">Превью</div>
+<div class="item">Хранилище</div>
+<div class="item">CDN</div>
+<div class="item">Кэширование</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 6 -->
+
+<section class="section">
+
+<div class="section-number">
+06
+</div>
+
+<h3>
+💬 Общение
+</h3>
+
+<div class="items">
+
+<div class="item">Личные сообщения</div>
+<div class="item">Чаты</div>
+<div class="item">Уведомления</div>
+<div class="item">Группы / сообщества</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 7 -->
+
+<section class="section">
+
+<div class="section-number">
+07
+</div>
+
+<h3>
+🔎 Поиск
+</h3>
+
+<div class="items">
+
+<div class="item">Пользователи</div>
+<div class="item">Посты</div>
+<div class="item">Видео</div>
+<div class="item">Сообщества</div>
+<div class="item">Товары</div>
+<div class="item">Хэштеги</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 8 -->
+
+<section class="section">
+
+<div class="section-number">
+08
+</div>
+
+<h3>
+🛡️ Безопасность
+</h3>
+
+<div class="items">
+
+<div class="item">WAF / DDoS</div>
+<div class="item">Защита API</div>
+<div class="item">Rate limit</div>
+<div class="item">Антибот</div>
+<div class="item">Антифрод</div>
+<div class="item">Антинакрутка</div>
+<div class="item">Шифрование</div>
+<div class="item">Безопасные пароли</div>
+<div class="item">Разграничение прав</div>
+<div class="item">Audit log</div>
+<div class="item">Защищённая админка</div>
+<div class="item">Backup</div>
+<div class="item">Аварийное восстановление</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 9 -->
+
+<section class="section">
+
+<div class="section-number">
+09
+</div>
+
+<h3>
+🚨 Модерация
+</h3>
+
+<div class="items">
+
+<div class="item">Жалобы</div>
+<div class="item">Автоматическая модерация</div>
+<div class="item">Ручная модерация</div>
+<div class="item">Блокировки</div>
+<div class="item">Система предупреждений</div>
+<div class="item">Защита от спама</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 10 -->
+
+<section class="section">
+
+<div class="section-number">
+10
+</div>
+
+<h3>
+💰 Экономика
+</h3>
+
+<div class="items">
+
+<div class="item">Реклама</div>
+<div class="item">Рекламные выплаты авторам</div>
+<div class="item">Подарки авторам</div>
+<div class="item">Бонусы</div>
+<div class="item">Кэшбэк</div>
+<div class="item">Покупки</div>
+<div class="item">Платные функции</div>
+<div class="item">Внутренняя бонусная валюта</div>
+<div class="item">Балансы</div>
+<div class="item">История транзакций</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 11 -->
+
+<section class="section">
+
+<div class="section-number">
+11
+</div>
+
+<h3>
+🛒 Бизнес
+</h3>
+
+<div class="items">
+
+<div class="item">Бизнес-аккаунты</div>
+<div class="item">Магазины</div>
+<div class="item">Товары</div>
+<div class="item">Продажи</div>
+<div class="item">Комиссия платформы</div>
+<div class="item">Продвижение</div>
+<div class="item">Рекламные кампании</div>
+<div class="item">Биржа блогеров</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 12 -->
+
+<section class="section">
+
+<div class="section-number">
+12
+</div>
+
+<h3>
+📊 Аналитика
+</h3>
+
+<div class="items">
+
+<div class="item">Просмотры</div>
+<div class="item">Охваты</div>
+<div class="item">Подписки</div>
+<div class="item">Вовлечённость</div>
+<div class="item">Доход автора</div>
+<div class="item">Эффективность рекламы</div>
+<div class="item">Антифрод-аналитика</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 13 -->
+
+<section class="section">
+
+<div class="section-number">
+13
+</div>
+
+<h3>
+⚙️ Инфраструктура
+</h3>
+
+<div class="items">
+
+<div class="item">Backend</div>
+<div class="item">API</div>
+<div class="item">PostgreSQL</div>
+<div class="item">Redis</div>
+<div class="item">Очереди задач</div>
+<div class="item">Object Storage</div>
+<div class="item">CDN</div>
+<div class="item">Мониторинг</div>
+<div class="item">Логи</div>
+<div class="item">Backup</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 14 -->
+
+<section class="section">
+
+<div class="section-number">
+14
+</div>
+
+<h3>
+📈 Масштабирование
+</h3>
+
+<div class="items">
+
+<div class="item">Load Balancer</div>
+<div class="item">Кластер серверов</div>
+<div class="item">Репликация БД</div>
+<div class="item">Добавление серверов без остановки</div>
+<div class="item">Автомасштабирование</div>
+<div class="item">Отказоустойчивость</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 15 -->
+
+<section class="section">
+
+<div class="section-number">
+15
+</div>
+
+<h3>
+🔐 Финансовая безопасность
+</h3>
+
+<div class="items">
+
+<div class="item">Деньги отдельно от бонусной валюты</div>
+<div class="item">Неизменяемый журнал транзакций</div>
+<div class="item">Защита балансов</div>
+<div class="item">Защита выплат</div>
+<div class="item">Лимиты</div>
+<div class="item">Проверка подозрительных операций</div>
+
+</div>
+
+</section>
+
+
+
+<!-- 16 -->
+
+<section class="section">
+
+<div class="section-number">
+16
+</div>
+
+<h3>
+⚖️ Юридическая часть
+</h3>
+
+<div class="items">
+
+<div class="item">Пользовательское соглашение</div>
+<div class="item">Политика конфиденциальности</div>
+<div class="item">Правила контента</div>
+<div class="item">Правила рекламы</div>
+<div class="item">Правила бонусов / валюты</div>
+<div class="item">Платежная и налоговая часть</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     ИТОГ
+========================= -->
+
+<section class="conclusion">
+
+<h2>
+Это больше,
+чем социальная сеть.
+</h2>
+
+<p>
+
+Это уже не просто «копия Instagram»,
+а полноценная социальная платформа
+с видео, авторами, бизнесом
+и собственной экономикой.
+
+</p>
+
+</section>
+
+
+
+<!-- =========================
+     ЭКОНОМИКА
+========================= -->
+
+<section class="economy">
+
+
+<div class="economy-header">
+
+<div class="eyebrow">
+БИЗНЕС-МОДЕЛЬ
+</div>
+
+
+<h2>
+💰 Откуда зарабатываем мы
+</h2>
+
+
+<p>
+
+У платформы должно быть несколько
+источников дохода, чтобы не зависеть
+только от рекламы.
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+01 — Реклама
+</h3>
+
+<p>
+
+Главный источник на большой аудитории.
+Рекламодатель платит нам → часть отдаём автору →
+остальное наша выручка.
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+02 — Комиссия с подарков авторам 🎁
+</h3>
+
+<p>
+
+Пользователь покупает подарок →
+автор получает, например, 70% →
+<strong>30% наша комиссия.</strong>
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+03 — Комиссия с покупок 🛒
+</h3>
+
+<p>
+
+Продавец продаёт товар через платформу →
+мы удерживаем процент с продажи.
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+04 — Платное продвижение
+</h3>
+
+<p>
+
+Пользователь или бизнес платит,
+чтобы продвинуть пост, видео,
+профиль или товар.
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+05 — Платные функции для бизнеса
+</h3>
+
+<p>
+
+Расширенная аналитика, инструменты магазина,
+рекламные возможности и другие функции.
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+06 — Внутренняя валюта
+</h3>
+
+<p>
+
+Пользователь покупает её за реальные деньги
+и использует внутри платформы.
+Наша маржа формируется на экономике этой системы.
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+07 — Комиссия с рекламной биржи блогеров
+</h3>
+
+<p>
+
+Бренд платит за кампанию →
+деньги проходят через нашу платформу →
+удерживаем комиссию.
+
+</p>
+
+</div>
+
+
+
+<div class="money-card">
+
+<h3>
+08 — Платные подписки авторов
+</h3>
+
+<p>
+
+Автор создаёт закрытый контент →
+пользователь платит →
+мы получаем процент.
+
+</p>
+
+</div>
+
+
+
+<!-- =========================
+     МОДЕЛЬ
+========================= -->
+
+<div class="economy-model">
+
+<h3>
+Главное
+</h3>
+
+
+<div class="model-line">
+
+<strong>
+Реклама → основной доход
+</strong>
+
+</div>
+
+
+<div class="model-line">
+
+<strong>
+Покупки + продвижение + бизнес
+→ второй слой
+</strong>
+
+</div>
+
+
+<div class="model-line">
+
+<strong>
+Подарки + подписки + внутренняя валюта
+→ третий слой
+</strong>
+
+</div>
+
+
+<p style="color:#9ca6b7;margin-top:30px;">
+
+И тогда даже если рекламный рынок просел,
+платформа <strong>не остаётся без дохода.</strong>
+
+</p>
+
+
+<p style="color:#9ca6b7;">
+
+Причём бонусы и кэшбэк — это не обязательно
+наш прямой расход: их можно финансировать
+из рекламных бюджетов, комиссий и других источников,
+<strong>не раздавая пользователям больше,
+чем экономика платформы позволяет.</strong>
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     ФИНАЛ
+========================= -->
+
+<section class="final">
+
+<h2>
+PROJECT X
+</h2>
+
+<p>
+Временное название · Рабочая концепция
+</p>
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+PROJECT X · Временная презентация проекта
+
+</footer>
+
+
+</body>
+
+</html>
